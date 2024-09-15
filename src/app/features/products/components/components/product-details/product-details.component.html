@@ -1,0 +1,112 @@
+<div class="product-details" *ngIf="product">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-12">
+        <h6 class="my-2">{{ product.category }} __</h6>
+        <h5>{{ product.title }}</h5>
+        <p class="my-5">{{ product.description }}</p>
+        <!-- Product Images -->
+        <div class="product-images">
+          <!-- Display the first three images -->
+          <img
+            *ngFor="
+              let image of product.colors[selectedColorIndex]?.images.slice(
+                0,
+                3
+              );
+              let i = index
+            "
+            [src]="'assets/' + image"
+            alt="Product Image"
+            class="product-image"
+            (click)="selectImage(i)"
+          />
+
+          <!-- Show the additional image count if there are more than three images -->
+          <div
+            *ngIf="product.colors[selectedColorIndex]?.images.length > 3"
+            class="more-images"
+          >
+            +{{ product.colors[selectedColorIndex].images.length - 3 }}
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-12">
+        <div class="selected-image">
+          <img
+            [src]="
+              'assets/' +
+              product.colors[selectedColorIndex]?.images[selectedImageIndex]
+            "
+            alt="Selected Image"
+            class="selected-product-image"
+            [ngClass]="{
+              'animate-slide ': showAnimation,
+              'animate-slide-top': showAnimation2
+            }"
+          />
+        </div>
+      </div>
+      <div class="col-lg-4 col-12">
+        <div>
+          <h5>Size</h5>
+          <div>
+            <div class="size-selector">
+              <div
+                *ngFor="let size of allSizes"
+                class="size-button"
+                [ngClass]="{
+                  selected: selectedSize === size,
+                  disabled: !isSizeAvailable(size)
+                }"
+                (click)="selectSize(size)"
+              >
+                {{ size }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <!-- Display Product Review and Star Rating -->
+          <div class="review-container">
+            <span class="rating-text">REVIEWS</span>
+
+            <div class="stars">
+              <!-- Loop to create 5 stars -->
+              <i
+                *ngFor="let star of starsArray; let i = index"
+                class="star"
+                [ngClass]="{
+                  filled: i + 1 <= product.rate
+                }"
+              >
+                ★
+              </i>
+            </div>
+          </div>
+
+          <!-- Display Product Price -->
+          <div class="price-container">
+            <span class="price-text">Price</span>
+            <span class="price">${{ product.price }}</span>
+          </div>
+        </div>
+        <div>
+          <!-- Color Selector -->
+          <h5>COLOUR</h5>
+          <div class="color-selector">
+            <div
+              *ngFor="let color of product.colors; let i = index"
+              [ngClass]="{ selected: selectedColorIndex === i }"
+              (click)="onSelectColor(i)"
+              [ngStyle]="{ 'background-color': color.hex }"
+              class="color-button"
+            >
+              <!-- Empty div to create a circular color selector with only a background -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

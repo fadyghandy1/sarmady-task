@@ -1,0 +1,55 @@
+<form
+  class="form d-flex flex-column gap-3 w-100"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="d-flex flex-column gap-2">
+    <label for="search"> Search By </label>
+    <p-dropdown
+      id="search"
+      formControlName="search"
+      [options]="filterOptions"
+      optionLabel="name"
+      optionValue="value"
+      [showClear]="true"
+      [filter]="true"
+      [placeholder]="'Search By'"
+      [style]="{ width: '100%' }"
+    />
+  </div>
+  <div class="form__array d-flex flex-column gap-3" formArrayName="filters">
+    @for (filter of form.controls.filters.value; track filter.name) {
+      <p-panel [header]="filter.name! | renameValues: renameFiltersMap">
+        <div class="d-flex gap-2" [formGroupName]="$index">
+          <input
+            pInputText
+            formControlName="value"
+            placeholder="Value"
+            [style]="{ width: '100%' }"
+          />
+          <div class="d-flex align-items-center gap-1">
+            <p-dropdown
+              formControlName="operator"
+              [options]="operatorOptions"
+              optionLabel="name"
+              [showClear]="true"
+              [placeholder]="'Operator'"
+              [style]="{ width: '100%' }"
+              appendTo="body"
+            />
+
+            <p-button
+              icon="pi pi-trash"
+              (click)="removeFilter($index)"
+              severity="danger"
+            />
+          </div>
+        </div>
+      </p-panel>
+    }
+  </div>
+  <div class="d-flex justify-content-start gap-2">
+    <p-button label="Save" type="submit" severity="success" />
+    <p-button label="Reset" severity="danger" (onClick)="onReset()" />
+  </div>
+</form>

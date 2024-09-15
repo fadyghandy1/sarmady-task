@@ -1,0 +1,13 @@
+<form [formGroup]="form" class="form d-flex flex-column gap-2 w-100">
+  <label for="filters"> Columns </label>
+
+  <p-multiSelect
+    class="w-100"
+    formControlName="columns"
+    [options]="columnsOptions()"
+    optionLabel="name"
+    optionValue="value"
+    display="chip"
+    [style]="{ width: '100%' }"
+  />
+</form>

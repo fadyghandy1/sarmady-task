@@ -1,0 +1,22 @@
+@import 'abstracts';
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 100%;
+  width: 100%;
+  // overflow-x: hidden;
+  background: radial-gradient(circle, var(--surface-e), var(--surface-b));
+  backface-visibility: hidden;
+}
+
+.main {
+  min-width: 100%;
+  height: 100%;
+}

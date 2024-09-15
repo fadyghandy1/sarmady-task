@@ -1,0 +1,19 @@
+<header class="header-container">
+  <div>
+    <h4>{{ product?.title }}</h4>
+  </div>
+  <div class="">
+    <button mat-raised-button color="primary" routerLink="/">
+      <mat-icon>arrow_back</mat-icon>
+      <span> Back </span>
+    </button>
+  </div>
+  <div class="button-conteiner">
+    <button mat-raised-button>
+      <img src="../../../../../../assets/imgs/bag.svg" />
+    </button>
+    <span class="number" *ngIf="numberProductInCart > 0">{{
+      numberProductInCart
+    }}</span>
+  </div>
+</header>

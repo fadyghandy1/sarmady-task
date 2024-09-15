@@ -1,0 +1,13 @@
+<div class="layout" setRtl>
+  @if (showHeader()) {
+    <header class="w-100">
+      <agg-header></agg-header>
+    </header>
+  }
+
+  <main class="main">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<agg-loader></agg-loader>

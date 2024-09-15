@@ -1,0 +1,21 @@
+<div class="container" *ngIf="products[currentIndex]">
+  <div class="row">
+    <div class="col-12">
+      <agg-product-header
+        [product]="products[currentIndex]"
+        [numberProductInCart]="itemOnCart"
+      ></agg-product-header>
+      <app-product-details
+        [product]="products[currentIndex]"
+      ></app-product-details>
+      <agg-product-footer
+        [currentIndex]="currentIndex"
+        [products]="products"
+        [videoUrl]="products[currentIndex].video"
+        (addedToFav)="addToFav($event)"
+        (addedTocart)="addToCart($event)"
+        (slideChange)="slideChange($event)"
+      ></agg-product-footer>
+    </div>
+  </div>
+</div>

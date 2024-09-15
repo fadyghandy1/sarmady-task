@@ -1,0 +1,30 @@
+<div class="header agg-container-fluid" #headerRef setRtl>
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="header__logo" routerLink="/home">
+      <!-- <agg-svg
+        url="assets/imgs/header-logo.svg"
+        [overrideColor]="false"
+        [overrideSize]="true"
+      ></agg-svg> -->
+    </div>
+
+    <ul class="header__navs d-none d-md-flex align-items-center">
+      @for (nav of navs(); track nav.name; let i = $index) {
+        <li class="header__nav-item">
+          <a
+            [class]="'header__nav-link' + ' ' + (nav.className || '')"
+            [routerLink]="nav.url"
+            routerLinkActive="header__nav-link--active"
+          >
+            {{ nav.name | translate }}
+          </a>
+        </li>
+      }
+      <!-- <li class="header__nav-item">
+        <p-button (click)="logout()" label="Logout" />
+      </li> -->
+    </ul>
+
+    <agg-menu class="d-block d-md-none" [navs]="navs()"></agg-menu>
+  </div>
+</div>

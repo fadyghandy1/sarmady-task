@@ -1,0 +1,15 @@
+<form class="form d-flex flex-column gap-2" [formGroup]="form">
+  <label for="filters"> Filters </label>
+  <p-iconField iconPosition="right">
+    <input
+      id="filters"
+      pInputText
+      formControlName="filter"
+      placeholder="Filter"
+      (click)="onClick()"
+    />
+    <p-inputIcon (click)="onClick()">
+      <i class="pi pi-pencil"></i>
+    </p-inputIcon>
+  </p-iconField>
+</form>

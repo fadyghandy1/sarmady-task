@@ -1,0 +1,83 @@
+<footer class="footer flex-column flex-lg-row">
+  <div class="d-flex align-items-center justify-content-center">
+    <!-- Play Button -->
+    <div class="button-conteiner my-2 mx-3" (click)="openVideoDialog()">
+      <button mat-icon-button aria-label="Play Video">
+        <mat-icon>play_circle</mat-icon>
+      </button>
+      <span> Play Video </span>
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <div class="my-2 mx-5">
+      <!-- Left Arrow Button -->
+      <button
+        mat-icon-button
+        aria-label="Previous"
+        (click)="onSlideChange(currentIndex - 1)"
+        [disabled]="currentIndex <= 0"
+      >
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <!-- Right Arrow Button -->
+      <button
+        mat-icon-button
+        aria-label="Next"
+        (click)="onSlideChange(currentIndex + 1)"
+        [disabled]="currentIndex >= products.length - 1"
+      >
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
+    <!-- Current Item Indicator -->
+    <div class="d-flex align-items-center my-2">
+      <span class="item-indicator">
+        {{ currentIndex + 1 }}
+      </span>
+      <div
+        *ngFor="let product of products; let i = index"
+        class="item-line"
+        [ngClass]="{ 'item-line__active': i === currentIndex }"
+      ></div>
+      <span class="item-indicator">
+        {{ products.length }}
+      </span>
+    </div>
+  </div>
+  <div class="d-flex align-items-center justify-content-center">
+    <!-- Add to Cart Button -->
+    <div
+      class="button-conteiner button-conteiner__withBackground my-2 mx-3"
+      (click)="addToCart()"
+    >
+      <button mat-raised-button color="primary">
+        <!-- <mat-icon>shopping_cart</mat-icon> -->
+        <span> Add to Cart </span>
+      </button>
+    </div>
+    <div class="my-2">
+      <!-- Favorite Button -->
+      <button
+        mat-icon-button
+        aria-label="Add to Favorite"
+        (click)="addToFav()"
+        [ngClass]="{ 'fav-active': isFav, 'fav-inactive': !isFav }"
+      >
+        <mat-icon>{{ isFav ? 'favorite' : 'favorite_border' }}</mat-icon>
+      </button>
+    </div>
+  </div>
+</footer>
+<p-dialog
+  header="video"
+  [modal]="true"
+  [visible]="showVideoDialog()"
+  (visibleChange)="showVideoDialog.set($event)"
+  [style]="{ width: '100rem', height: '100vh' }"
+>
+  <app-video-dialog
+    [videoUrl]="videoUrl"
+    class="w-100 h-100"
+  ></app-video-dialog>
+</p-dialog>
